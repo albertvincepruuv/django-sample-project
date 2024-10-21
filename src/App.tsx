@@ -1,23 +1,18 @@
+// src/App.tsx
 import React, { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "./hooks";
 import logo from "./logo.svg";
 import "./App.css";
-import { getTrips } from "./Api/tripApi";
 import TripTable from "./Components/TripTable";
+import { fetchTrips } from "./tripSlice";
 
 function App() {
-  const [trips, setTrips] = React.useState([]);
-  const [loading, setLoading] = React.useState(false);
-
-  const fetchTrips = async () => {
-    setLoading(true);
-    const tripsResponse = await getTrips();
-    setTrips(tripsResponse);
-    setLoading(false);
-  };
+  const dispatch = useAppDispatch();
+  const { loading } = useAppSelector((state) => state.trips);
 
   useEffect(() => {
-    fetchTrips();
-  }, []);
+    dispatch(fetchTrips());
+  }, [dispatch]);
 
   return (
     <div className="App">
@@ -25,7 +20,7 @@ function App() {
         {loading ? (
           <img src={logo} className="App-logo" alt="logo" />
         ) : (
-          <TripTable trips={trips} />
+          <TripTable />
         )}
       </header>
     </div>

@@ -1,17 +1,12 @@
 import React from "react";
 
-type Trip = {
-  trip_id: number;
-  tripduration: Date;
-  start_station_name: string;
-  end_station_name: string;
-};
+import { useAppSelector } from "../hooks";
+import { RootState } from "../Stores/store";
+import { Trip } from "../Types/types";
 
-type TripTableProps = {
-  trips: Trip[];
-};
+const TripTable = () => {
+  const trips: Trip[] = useAppSelector((state: RootState) => state.trips.trips);
 
-const TripTable: React.FC<TripTableProps> = ({ trips }) => {
   return (
     <table border={1} style={{ width: "100%", marginTop: "20px" }}>
       <thead>
