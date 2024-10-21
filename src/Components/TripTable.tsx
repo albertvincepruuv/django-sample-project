@@ -8,7 +8,15 @@ const TripTable = () => {
   const trips: Trip[] = useAppSelector((state: RootState) => state.trips.trips);
 
   return (
-    <table border={1} style={{ width: "100%", marginTop: "20px" }}>
+    <table
+      className="table table-striped table-sm"
+      style={{
+        width: "100%",
+        marginLeft: "30px",
+        marginRight: "10px",
+        marginTop: "20px"
+      }}
+    >
       <thead>
         <tr>
           <th>ID</th>
@@ -26,8 +34,8 @@ const TripTable = () => {
           trips.map((trip) => (
             <tr key={trip.trip_id}>
               <td>{trip.trip_id}</td>
-              <td>{trip.start_station_name}</td>
-              <td>{trip.end_station_name}</td>
+              <td style={{ textAlign: "left" }}>{trip.start_station_name}</td>
+              <td style={{ textAlign: "left" }}>{trip.end_station_name}</td>
               <td>
                 {new Date(trip.tripduration).toTimeString().split(" ")[0]}
               </td>
